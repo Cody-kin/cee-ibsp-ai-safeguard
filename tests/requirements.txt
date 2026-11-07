@@ -1,0 +1,13 @@
+pytest==8.4.2
+fastapi==0.141.1
+starlette==1.6.0
+httpx==0.28.1
+pydantic==2.13.4
+python-multipart==0.0.32
+SQLAlchemy==2.0.44
+python-jose==3.5.0
+bcrypt==4.3.0
+psycopg2-binary==2.9.11
+redis==7.0.1
+paho-mqtt==1.6.1
+requests==2.32.5

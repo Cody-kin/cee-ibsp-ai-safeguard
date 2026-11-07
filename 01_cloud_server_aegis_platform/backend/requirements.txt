@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+redis
+python-jose[cryptography]
+bcrypt
+python-multipart
+requests
+paho-mqtt==1.6.1

@@ -1,0 +1,42 @@
+import { create } from 'zustand';
+
+export interface AiMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+  link?: string;
+}
+
+interface NotifyStore {
+  notifications: Notification[];
+  unreadCount: number;
+  aiHistory: AiMessage[];
+  addNotification: (title: string, message: string, link?: string) => void;
+  markAllRead: () => void;
+  addAiMessage: (message: AiMessage) => void;
+}
+
+export const useNotifyStore = create<NotifyStore>((set) => ({
+  notifications: [],
+  unreadCount: 0,
+  aiHistory: [],
+  addNotification: (title, message, link) => set((state) => ({
+    notifications: [
+      { id: Date.now().toString(), title, message, time: new Date().toLocaleTimeString(), read: false, link },
+      ...state.notifications
+    ],
+    unreadCount: state.unreadCount + 1
+  })),
+  markAllRead: () => set((state) => ({
+    notifications: state.notifications.map(n => ({ ...n, read: true })),
+    unreadCount: 0
+  })),
+  addAiMessage: (msg) => set((state) => ({ aiHistory: [...state.aiHistory, msg] }))
+}));
